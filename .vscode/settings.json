@@ -1,0 +1,7 @@
+{
+    "folders": [],
+    "settings": {},
+    "[javascript, javascriptreact, typescript, typescriptreact, json]": {
+      "editor.formatOnSave": true
+    }
+  }
