@@ -9,8 +9,28 @@ interface AppProps {
 }
 
 class _App extends React.Component<AppProps> {
+  componentDidMount(){
+    // this.props.fetchPostsAsync();
+  }
+
+  onButtonClick = ():void => {
+    this.props.fetchPostsAsync();
+  }
+
+  renderList(): JSX.Element[] {
+    return this.props.posts.map((post: Posts) => {
+      return <div key={post.id}>{post.title}</div>
+    });
+  }
+
   render() {
-    return <div>Hello</div>;
+    // console.log(this.props.posts);
+    return (
+      <div>
+        <button onClick={this.onButtonClick}>Fetch Posts</button>
+        {this.renderList()}
+      </div>
+    )
   }
 }
 
