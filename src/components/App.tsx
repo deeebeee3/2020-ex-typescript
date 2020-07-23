@@ -1,11 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Posts, fetchPostsAsync } from "../actions";
+import { Posts, fetchPostsAsync, deletePost } from "../actions";
 import { StoreState } from "../reducers";
 
 interface AppProps {
   posts: Posts[];
-  fetchPostsAsync(): any;
+  fetchPostsAsync: typeof fetchPostsAsync;
+  deletePost: typeof deletePost;
 }
 
 class _App extends React.Component<AppProps> {
@@ -17,9 +18,17 @@ class _App extends React.Component<AppProps> {
     this.props.fetchPostsAsync();
   }
 
+  onPostClick = (id: number): void => {
+    this.props.deletePost(id)
+  }
+
   renderList(): JSX.Element[] {
     return this.props.posts.map((post: Posts) => {
-      return <div key={post.id}>{post.title}</div>
+      return (
+          <div onClick={() => this.onPostClick(post.id)} key={post.id}>
+            {post.title}
+          </div>
+        );
     });
   }
 
@@ -42,5 +51,5 @@ const mapStateToProps = (state: StoreState): { posts: Posts[] } => {
 
 export const App = connect(
   mapStateToProps,
-  {fetchPostsAsync}
+  {fetchPostsAsync, deletePost}
 )(_App);
