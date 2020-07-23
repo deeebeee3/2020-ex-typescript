@@ -11,6 +11,7 @@ interface AppProps {
 
 interface AppState {
   fetching: boolean;
+  counter: number;
 }
 
 class _App extends React.Component<AppProps, AppState> {
@@ -22,25 +23,27 @@ class _App extends React.Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props);
 
-    this.state = { fetching: false };
+    this.state = { 
+      fetching: false,
+      counter: 0 
+    };
   }
 
   componentDidMount(){
     // this.props.fetchPostsAsync();
   }
 
-  //this lifecycle method is called with previous set of props from 
+  //this lifecycle method is called with previous set of props and state from 
   //last time this component was rendered
-  componentDidUpdate(prevProps: AppProps): void {
-    //if prev props had no posts and currents props does have posts
-    if (!prevProps.posts.length && this.props.posts.length) {
+  componentDidUpdate(prevState: StoreState): void {
+    if ( prevState.posts !== this.props.posts ) {
       this.setState({ fetching: false });
     }
   }
 
   onButtonClick = ():void => {
     this.props.fetchPostsAsync();
-    this.setState({ fetching: true });
+    this.setState({ fetching: true, counter: this.state.counter + 1 });
   }
 
   onPostClick = (id: number): void => {
@@ -59,10 +62,11 @@ class _App extends React.Component<AppProps, AppState> {
 
   render() {
     // console.log(this.props.posts);
+
     return (
       <div>
         <button onClick={this.onButtonClick}>Fetch Posts</button>
-        {this.state.fetching ? 'LOADING' : null}
+        {this.state.fetching ? `LOADING: ${ this.state.counter }` : null}
         {this.renderList()}
       </div>
     )
