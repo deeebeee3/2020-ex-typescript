@@ -13,12 +13,12 @@ export interface FetchPostsAction {
     payload: Posts[]
 }
 
-export interface DeletePost {
+export interface DeletePostAction {
   type: ActionTypes.deletePost;
   payload: number
 }
 
-export const deletePost = (id: number): DeletePost => {
+export const deletePost = (id: number): DeletePostAction => {
   return {
     type: ActionTypes.deletePost,
     payload: id,

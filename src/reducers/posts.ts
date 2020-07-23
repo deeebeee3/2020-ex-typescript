@@ -1,9 +1,9 @@
-import { Posts, FetchPostsAction, ActionTypes } from "../actions";
+import { Posts, Action, ActionTypes } from "../actions";
 
 //state has type of Posts[] and default value [] empty array
 export const postsReducer = (
   state: Posts[] = [],
-  action: FetchPostsAction
+  action: Action
 ) => {
     switch (action.type) {
         case ActionTypes.fetchPosts:
