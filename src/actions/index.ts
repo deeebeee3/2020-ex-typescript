@@ -1,5 +1,6 @@
 import { api } from "../apis";
 import { Dispatch, Store } from "redux";
+import { ActionTypes } from '../actions/types';
 
 interface Posts {
     id: number;
@@ -19,7 +20,7 @@ export const fetchPostsAsync = () => {
     const response = await api.get<Posts[]>("/posts");
 
     dispatch({
-      type: "FETCH_POSTS",
+      type: ActionTypes.fetchPosts,
       payload: response.data,
     });
   };
