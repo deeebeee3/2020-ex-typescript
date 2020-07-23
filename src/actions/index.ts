@@ -8,6 +8,11 @@ interface Posts {
     body: string;
 }
 
+interface FetchTodosAction {
+    type: ActionTypes.fetchPosts;
+    payload: Posts[]
+}
+
 export const fetchPosts = () => {
   return {
     type: "FETCH_POSTS",
@@ -19,7 +24,7 @@ export const fetchPostsAsync = () => {
   return async (dispatch: Dispatch, getState: Store) => {
     const response = await api.get<Posts[]>("/posts");
 
-    dispatch({
+    dispatch<FetchTodosAction>({
       type: ActionTypes.fetchPosts,
       payload: response.data,
     });
