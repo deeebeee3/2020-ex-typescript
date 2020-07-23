@@ -1,3 +1,4 @@
 export enum ActionTypes {
-    fetchPosts
+    fetchPosts,
+    deletePost
 }
