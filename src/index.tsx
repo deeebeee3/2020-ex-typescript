@@ -9,7 +9,7 @@ import thunk from "redux-thunk";
 // import AppF from "./components/AppF";
 import App from "./components/App";
 
-import reducers from "./reducers";
+import { reducers } from "./reducers";
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
