@@ -1,31 +1,26 @@
 import React from "react";
+import { connect } from "react-redux";
+import { Posts, fetchPostsAsync } from "../actions";
+import { StoreState } from "../reducers";
 
 interface AppProps {
-  color?: string; //optional prop
+  posts: Posts[];
+  fetchPostsAsync(): any;
 }
 
-class App extends React.Component<AppProps> {
-  state = { counter: 0 };
-
-  onIncrement = (): void => {
-    this.setState({ counter: this.state.counter + 1 });
-  };
-
-  onDecrement = (): void => {
-    this.setState({ counter: this.state.counter - 1 });
-  };
-
+class _App extends React.Component<AppProps> {
   render() {
-    return (
-      <div>
-        {this.props.color}
-        <br />
-        <button onClick={this.onIncrement}>Increment</button>
-        <button onClick={this.onDecrement}>Decrement</button>
-        {this.state.counter}
-      </div>
-    );
+    return <div>Hello</div>;
   }
 }
 
-export default App;
+const mapStateToProps = (state: StoreState): { posts: Posts[] } => {
+  return {
+    posts: state.posts
+  }
+}
+
+export const App = connect(
+  mapStateToProps,
+  {fetchPostsAsync}
+)(_App);
