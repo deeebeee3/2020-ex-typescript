@@ -9,13 +9,38 @@ interface AppProps {
   deletePost: typeof deletePost;
 }
 
-class _App extends React.Component<AppProps> {
+interface AppState {
+  fetching: boolean;
+}
+
+class _App extends React.Component<AppProps, AppState> {
+
+  //Do this if not passing Appstate to Generic - overriding state
+  //state = { fetching: false };
+
+  //Passing AppState to Generic - not overriding state
+  constructor(props: AppProps) {
+    super(props);
+
+    this.state = { fetching: false };
+  }
+
   componentDidMount(){
     // this.props.fetchPostsAsync();
   }
 
+  //this lifecycle method is called with previous set of props from 
+  //last time this component was rendered
+  componentDidUpdate(prevProps: AppProps): void {
+    //if prev props had no posts and currents props does have posts
+    if (!prevProps.posts.length && this.props.posts.length) {
+      this.setState({ fetching: false });
+    }
+  }
+
   onButtonClick = ():void => {
     this.props.fetchPostsAsync();
+    this.setState({ fetching: true });
   }
 
   onPostClick = (id: number): void => {
@@ -37,6 +62,7 @@ class _App extends React.Component<AppProps> {
     return (
       <div>
         <button onClick={this.onButtonClick}>Fetch Posts</button>
+        {this.state.fetching ? 'LOADING' : null}
         {this.renderList()}
       </div>
     )
