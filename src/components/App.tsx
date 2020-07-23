@@ -4,20 +4,8 @@ interface AppProps {
   color?: string; //optional prop
 }
 
-interface AppState {
-  counter: number;
-}
-
-class AppC extends React.Component<AppProps, AppState> {
-  //property method of initializing state object - override state property
-  //state = { counter : 0};
-
-  //constructor method of initializing state object - not overriding state property
-  constructor(props: AppProps) {
-    super(props);
-
-    this.state = { counter: 0 };
-  }
+class App extends React.Component<AppProps> {
+  state = { counter: 0 };
 
   onIncrement = (): void => {
     this.setState({ counter: this.state.counter + 1 });
@@ -40,4 +28,4 @@ class AppC extends React.Component<AppProps, AppState> {
   }
 }
 
-export default AppC;
+export default App;
