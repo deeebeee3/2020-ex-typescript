@@ -5,7 +5,7 @@ import { StoreState } from "../reducers";
 
 interface AppProps {
   posts: Posts[];
-  fetchPostsAsync: typeof fetchPostsAsync;
+  fetchPostsAsync: Function;
   deletePost: typeof deletePost;
 }
 
