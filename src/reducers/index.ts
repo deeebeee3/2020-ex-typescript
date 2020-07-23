@@ -6,7 +6,12 @@
 
 import { combineReducers } from "redux";
 import { postsReducer } from './posts';
+import { Posts } from '../actions';
 
-export const reducers = combineReducers({
+export interface StoreState {
+  posts: Posts[]
+}
+
+export const reducers = combineReducers<StoreState>({
   posts: postsReducer,
 });
