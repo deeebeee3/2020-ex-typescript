@@ -8,6 +8,8 @@ export const postsReducer = (
     switch (action.type) {
         case ActionTypes.fetchPosts:
             return action.payload;
+        case ActionTypes.deletePost:
+            return state.filter((post: Posts) => { post.id !== action.payload });
         default:
             return state;
     }
